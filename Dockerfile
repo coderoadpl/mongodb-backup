@@ -8,10 +8,17 @@ RUN apt-get update && \
         curl \
         unzip \
         ca-certificates && \
+    # Detect architecture and download appropriate AWS CLI version
+    ARCH=$(uname -m) && \
+    if [ "$ARCH" = "aarch64" ]; then \
+        AWS_CLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"; \
+    else \
+        AWS_CLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"; \
+    fi && \
     # Download and install AWS CLI in a custom location
     mkdir -p /tmp/awscli && \
     cd /tmp/awscli && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" && \
+    curl "$AWS_CLI_URL" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     cd / && \
