@@ -1,0 +1,30 @@
+# Version control
+.git
+.gitignore
+.github
+
+# Environment files
+.env
+.env.example
+
+# Backup files
+backups/
+backup/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp 
