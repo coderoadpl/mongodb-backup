@@ -11,16 +11,8 @@ mkdir -p $BACKUP_PATH
 
 echo "Starting MongoDB backup at $(date)..."
 
-# Build authentication options
-AUTH_OPTS=""
-if [ -n "$MONGODB_USERNAME" ] && [ -n "$MONGODB_PASSWORD" ]; then
-  AUTH_OPTS="--username=$MONGODB_USERNAME --password=$MONGODB_PASSWORD --authenticationDatabase=$MONGODB_AUTH_DB"
-fi
-
-# Run mongodump to backup all databases and collections
-mongodump --host=$MONGODB_HOST \
-  --port=$MONGODB_PORT \
-  $AUTH_OPTS \
+# Run mongodump using the connection string from environment
+mongodump --uri="$MONGODB_URI" \
   --out=$BACKUP_PATH
 
 echo "MongoDB dump completed."
